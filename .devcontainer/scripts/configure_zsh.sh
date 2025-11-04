@@ -2,7 +2,7 @@
 set -euo pipefail
 
 if [ -d /home/coder ]; then
-  sudo -u coder git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /home/coder/.powerlevel10k
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /home/coder/.powerlevel10k
   # Add to .zshrc if not present
   grep -qxF 'source ~/.powerlevel10k/powerlevel10k.zsh-theme' "/home/coder/.zshrc" || \
     echo 'source ~/.powerlevel10k/powerlevel10k.zsh-theme' >> "/home/coder/.zshrc"
@@ -13,7 +13,7 @@ if [ -d /home/coder ]; then
   fi
 fi
 
-sudo -u coder sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Define variables
 USER_HOME="/home/coder"
