@@ -8,5 +8,7 @@ ARG GID=1001
 RUN groupadd -g ${GID} ${USER} \
  && useradd -m -s /bin/sh -u ${UID} -g ${GID} ${USER}
 
+RUN apt-get update && apt-get install -y curl
+
 USER coder
 WORKDIR /home/coder
