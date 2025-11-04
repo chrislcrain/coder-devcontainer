@@ -1,37 +1,7 @@
 {
-  "name": "ubuntu-dev",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": ".."
-  },
-
-  // Make sure we run as a normal user
-  "remoteUser": "coder",
-
-  // Persist home between rebuilds if you mount a host volume at /home/coder via the template
-  "mounts": [
-    // If you mounted NFS at /workspace on the host, bind it in:
-    "source=/workspace,target=/workspace,type=bind,consistency=cached"
-  ],
-
-  // Handy defaults
-  "containerEnv": {
-    "TZ": "UTC"
-  },
-
-  // Perform setup once image is built & container is created
-  "postCreateCommand": "bash /usr/local/share/devcontainer/install-packages.sh && bash /usr/local/share/devcontainer/configure-zsh.sh",
-
+  "name": "envbuilder",
+  "image": "mcr.microsoft.com/devcontainers/go:1.22",
   "features": {
-    // You can swap these for devcontainers/features if you prefer
-  },
-
-  "customizations": {
-    "vscode": {
-      "settings": {
-        "terminal.integrated.defaultProfile.linux": "zsh"
-      },
-      "extensions": ["ms-vscode.remote-containers", "eamodio.gitlens"]
-    }
+    "ghcr.io/devcontainers/features/docker-in-docker": {}
   }
 }
