@@ -15,7 +15,8 @@ RUN chmod +x /usr/local/share/devcontainer/*.sh \
 RUN bash /usr/local/share/devcontainer/install_packages.sh \
  && bash /usr/local/share/devcontainer/install_awscli.sh \
  && bash /usr/local/share/devcontainer/configure_zsh.sh \
- && pipx ensurepath
+
+RUN pipx ensurepath
 
 RUN chsh -s /usr/bin/zsh ${USER}
 

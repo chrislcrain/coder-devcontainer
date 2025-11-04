@@ -1,37 +1,57 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-USER_HOME="${HOME}"
-ZSH="${USER_HOME}/.oh-my-zsh"
-
-# Oh My Zsh
-if [ ! -d "${ZSH}" ]; then
-  RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+if [ -d /home/coder ]; then
+  sudo -u coder git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /home/coder/.powerlevel10k
+  # Add to .zshrc if not present
+  grep -qxF 'source ~/.powerlevel10k/powerlevel10k.zsh-theme' "/home/coder/.zshrc" || \
+    echo 'source ~/.powerlevel10k/powerlevel10k.zsh-theme' >> "/home/coder/.zshrc"
+  # Copy pre-configured .p10k.zsh if available
+  if [ -f /etc/p10k.zsh ]; then
+    cp /etc/p10k.zsh /home/coder/.p10k.zsh
+    chown coder:coder /home/coder/.p10k.zsh
+  fi
 fi
 
-# Powerlevel10k
-if [ ! -d "${USER_HOME}/.powerlevel10k" ]; then
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${USER_HOME}/.powerlevel10k"
-fi
-grep -qxF 'source ~/.powerlevel10k/powerlevel10k.zsh-theme' "${USER_HOME}/.zshrc" || \
-  echo 'source ~/.powerlevel10k/powerlevel10k.zsh-theme' >> "${USER_HOME}/.zshrc"
+sudo -u coder sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Plugins
-ZSH_CUSTOM="${ZSH}/custom"
-SYNTAX="${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting"
-AUTOSUG="${ZSH_CUSTOM}/plugins/zsh-autosuggestions"
+# Define variables
+USER_HOME="/home/coder"
+ZSH_CUSTOM="$USER_HOME/.oh-my-zsh/custom"
+ZSHRC="$USER_HOME/.zshrc"
+SYNTAX_HIGHLIGHTING="$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+AUTOSUGGESTIONS="$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 
-[ -d "${SYNTAX}" ] || git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${SYNTAX}"
-[ -d "${AUTOSUG}" ] || git clone https://github.com/zsh-users/zsh-autosuggestions "${AUTOSUG}"
-
-if ! grep -q "plugins=.*zsh-syntax-highlighting.*zsh-autosuggestions" "${USER_HOME}/.zshrc"; then
-  sed -i '/^plugins=/ s/)/ zsh-syntax-highlighting zsh-autosuggestions)/' "${USER_HOME}/.zshrc" || \
-  echo 'plugins=(git zsh-syntax-highlighting zsh-autosuggestions)' >> "${USER_HOME}/.zshrc"
+# Ensure Oh My Zsh exists
+if [ ! -d "$USER_HOME/.oh-my-zsh" ]; then
+  echo "Oh My Zsh not found in $USER_HOME/.oh-my-zsh. Aborting."
+  exit 1
 fi
 
-# Optional: bring your prebuilt P10K config into the container image
-if [ -f "/usr/local/share/devcontainer/.p10k.zsh" ]; then
-  cp /usr/local/share/devcontainer/.p10k.zsh "${USER_HOME}/.p10k.zsh"
+# Install zsh-syntax-highlighting
+if [ ! -d "$SYNTAX_HIGHLIGHTING" ]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$SYNTAX_HIGHLIGHTING"
 fi
 
-echo "configure-zsh.sh complete"
+# Install zsh-autosuggestions
+if [ ! -d "$AUTOSUGGESTIONS" ]; then
+  git clone https://github.com/zsh-users/zsh-autosuggestions "$AUTOSUGGESTIONS"
+fi
+
+# Make sure target plugins line is present in .zshrc
+if ! grep -q "plugins=.*zsh-syntax-highlighting.*zsh-autosuggestions" "$ZSHRC"; then
+  sed -i '/^plugins=/ s/)/ zsh-syntax-highlighting zsh-autosuggestions)/' "$ZSHRC"
+fi
+
+# Source plugins at the end of .zshrc if not already there
+if ! grep -q "zsh-syntax-highlighting.zsh" "$ZSHRC"; then
+  echo "source $SYNTAX_HIGHLIGHTING/zsh-syntax-highlighting.zsh" >> "$ZSHRC"
+fi
+if ! grep -q "zsh-autosuggestions.zsh" "$ZSHRC"; then
+  echo "source $AUTOSUGGESTIONS/zsh-autosuggestions.zsh" >> "$ZSHRC"
+fi
+
+# Set correct ownership
+chown coder:coder "$ZSHRC" "$SYNTAX_HIGHLIGHTING" "$AUTOSUGGESTIONS" -R
+
+echo "Plugins installed and .zshrc updated for user coder."
