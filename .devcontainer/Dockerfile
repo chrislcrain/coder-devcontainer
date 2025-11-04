@@ -1,17 +1,17 @@
-# # Ubuntu base, good for devcontainers + apt
-# FROM ubuntu:24.04
+# Ubuntu base, good for devcontainers + apt
+FROM ubuntu:24.04
 
-# # Avoid interactive prompts
-# ENV DEBIAN_FRONTEND=noninteractive
-# ARG USER=coder
-# ARG UID=1000
-# ARG GID=1000
+# Avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+ARG USER=coder
+ARG UID=1000
+ARG GID=1000
 
-# # Create non-root dev user
-# RUN groupadd -g ${GID} ${USER} \
-#  && useradd -m -s /bin/zsh -u ${UID} -g ${GID} ${USER}
+# Create non-root dev user
+RUN groupadd -g ${GID} ${USER} \
+ && useradd -m -s /bin/zsh -u ${UID} -g ${GID} ${USER}
 
-# # Core tools + Python dev essentials
+# Core tools + Python dev essentials
 # RUN apt-get update && apt-get install -y --no-install-recommends \
 #     zsh git curl ca-certificates \
 #     build-essential pkg-config \
@@ -28,5 +28,5 @@
 # RUN chown -R ${USER}:${USER} /usr/local/share/devcontainer \
 #  && chmod +x /usr/local/share/devcontainer/*.sh || true
 
-# USER ${USER}
-# WORKDIR /home/${USER}
+USER ${USER}
+WORKDIR /home/${USER}
