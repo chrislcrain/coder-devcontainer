@@ -1,30 +1,32 @@
-FROM mcr.microsoft.com/devcontainers/base:ubuntu-24.04
+# Ubuntu base, good for devcontainers + apt
+FROM ubuntu:24.04
 
-# Create a "coder" user compatible with devcontainers (uid/gid 1000 by default)
+# Avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
 ARG USER=coder
 ARG UID=1000
 ARG GID=1000
+
+# Create non-root dev user
 RUN groupadd -g ${GID} ${USER} \
  && useradd -m -s /bin/zsh -u ${UID} -g ${GID} ${USER}
 
-# Install OS packages (moved from cloud-init)
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    zsh gh curl ca-certificates gnupg lsb-release \
-    git build-essential unzip jq htop net-tools iputils-ping dnsutils tree wget tmux make \
-    libssl-dev zlib1g-dev python3-dev libpq-dev libbz2-dev libreadline-dev libsqlite3-dev \
-    xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev \
-  && rm -rf /var/lib/apt/lists/*
+# Core tools + Python dev essentials
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    zsh git curl ca-certificates \
+    build-essential pkg-config \
+    python3 python3-venv python3-pip python-is-python3 pipx \
+    libpq-dev \
+ && rm -rf /var/lib/apt/lists/*
 
-RUN ARCH=$(uname -m) \
- && curl -fsSL "https://awscli.amazonaws.com/awscli-exe-linux-${ARCH}.zip" -o /tmp/awscliv2.zip \
- && unzip -q /tmp/awscliv2.zip -d /tmp \
- && /tmp/aws/install \
- && rm -rf /tmp/aws /tmp/awscliv2.zip
+# (Optional) let pipx shims be on PATH for all shells
+ENV PIPX_BIN_DIR=/home/${USER}/.local/bin
+ENV PATH="${PIPX_BIN_DIR}:${PATH}"
 
-# Drop your helper scripts into the image
+# Include your helper scripts (postCreate, zsh setup, etc.)
 COPY .devcontainer/scripts /usr/local/share/devcontainer
-RUN chmod +x /usr/local/share/devcontainer/*.sh \
- && chown -R ${USER}:${USER} /usr/local/share/devcontainer
+RUN chown -R ${USER}:${USER} /usr/local/share/devcontainer \
+ && chmod +x /usr/local/share/devcontainer/*.sh || true
 
 USER ${USER}
 WORKDIR /home/${USER}
