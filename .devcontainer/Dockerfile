@@ -12,9 +12,9 @@ COPY .devcontainer/scripts /usr/local/share/devcontainer
 RUN chmod +x /usr/local/share/devcontainer/*.sh \
  && chown -R ${USER}:${USER} /usr/local/share/devcontainer
 
-RUN bash /usr/local/share/devcontainer/install_packages.sh \
- && bash /usr/local/share/devcontainer/install_awscli.sh \
- && bash /usr/local/share/devcontainer/configure_zsh.sh \
+RUN bash /usr/local/share/devcontainer/install_packages.sh
+RUN bash /usr/local/share/devcontainer/install_awscli.sh
+RUN bash /usr/local/share/devcontainer/configure_zsh.sh
 
 RUN pipx ensurepath
 
