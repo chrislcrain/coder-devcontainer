@@ -4,8 +4,8 @@ FROM ubuntu:24.04
 # Avoid interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
 ARG USER=coder
-ARG UID=1000
-ARG GID=1000
+ARG UID=1001
+ARG GID=1001
 
 # Create non-root dev user
 RUN groupadd -g ${GID} ${USER} \
