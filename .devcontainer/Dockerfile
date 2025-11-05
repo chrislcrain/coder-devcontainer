@@ -5,6 +5,9 @@ ARG USER=coder
 ARG UID=1001
 ARG GID=1001
 
+COPY .devcontainer/.p10k.zsh /etc/.p10k.zsh
+RUN chmod 0644 /etc/.p10k.zsh
+
 RUN groupadd -g ${GID} ${USER} \
  && useradd -m -s /bin/sh -u ${UID} -g ${GID} ${USER}
 
