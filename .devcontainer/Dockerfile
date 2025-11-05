@@ -4,9 +4,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 ARG USER=coder
 ARG UID=1001
 ARG GID=1001
+ARG DOCKER_GID=989
 
-RUN groupadd -g ${GID} ${USER} \
- && useradd -m -s /bin/sh -u ${UID} -g ${GID} ${USER}
+RUN groupadd -g ${DOCKER_GID} docker \
+ && groupadd -g ${GID} ${USER} \
+ && useradd -m -s /bin/zsh -u ${UID} -g ${GID} -G docker ${USER}
 
 COPY .devcontainer/files/.p10k.zsh /home/coder/.p10k.zsh
 COPY .devcontainer/scripts /usr/local/share/devcontainer
