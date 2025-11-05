@@ -6,12 +6,12 @@ ARG UID=1001
 ARG GID=1001
 ARG DOCKER_GID=989
 
+COPY .devcontainer/files/.p10k.zsh /home/coder/.p10k.zsh
+COPY .devcontainer/scripts /usr/local/share/devcontainer
+
 RUN groupadd -g ${DOCKER_GID} docker \
  && groupadd -g ${GID} ${USER} \
  && useradd -m -s /bin/zsh -u ${UID} -g ${GID} -G docker ${USER}
-
-COPY .devcontainer/files/.p10k.zsh /home/coder/.p10k.zsh
-COPY .devcontainer/scripts /usr/local/share/devcontainer
 
 RUN chown coder:coder /home/coder/.p10k.zsh \
  && chmod 0644 /home/coder/.p10k.zsh \
@@ -24,5 +24,6 @@ RUN chown coder:coder /home/coder/.p10k.zsh \
 
 USER coder
 RUN bash /usr/local/share/devcontainer/configure_zsh.sh \
- && pipx ensurepath
+ && pipx ensurepath \
+ && newgrp docker
 WORKDIR /home/coder
