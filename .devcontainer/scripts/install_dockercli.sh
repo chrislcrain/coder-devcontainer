@@ -3,6 +3,7 @@
 apt-get update && apt-get install -y \
     apt-transport-https \
     ca-certificates \
+    curl \
     gnupg
 
 install -m 0755 -d /etc/apt/keyrings
