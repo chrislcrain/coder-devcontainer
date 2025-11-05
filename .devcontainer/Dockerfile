@@ -5,11 +5,11 @@ ARG USER=coder
 ARG UID=1001
 ARG GID=1001
 
-COPY .devcontainer/files/.p10k.zsh /home/coder/.p10k.zsh
-RUN chown coder:coder /home/coder/.p10k.zsh && chmod 0644 /home/coder/.p10k.zsh
-
 RUN groupadd -g ${GID} ${USER} \
  && useradd -m -s /bin/sh -u ${UID} -g ${GID} ${USER}
+
+COPY .devcontainer/files/.p10k.zsh /home/coder/.p10k.zsh
+RUN chown coder:coder /home/coder/.p10k.zsh && chmod 0644 /home/coder/.p10k.zsh
 
 COPY .devcontainer/scripts /usr/local/share/devcontainer
 RUN chmod +x /usr/local/share/devcontainer/*.sh \
