@@ -1,4 +1,7 @@
-#!/usr/bin/env bash
-set -e
-
-exec su - coder
+#!/bin/bash
+if [ -d /workspace ]; then
+  cd /workspace
+else
+  cd /home/coder
+fi
+exec "$@"
