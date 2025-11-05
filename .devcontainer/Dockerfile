@@ -14,9 +14,8 @@ COPY .devcontainer/scripts /usr/local/share/devcontainer
 RUN chown coder:coder /home/coder/.p10k.zsh \
  && chmod 0644 /home/coder/.p10k.zsh \
  && chmod +x /usr/local/share/devcontainer/*.sh \
- && chown -R ${USER}:${USER} /usr/local/share/devcontainer
-
-RUN bash /usr/local/share/devcontainer/install_packages.sh \
+ && chown -R ${USER}:${USER} /usr/local/share/devcontainer \
+ && bash /usr/local/share/devcontainer/install_packages.sh \
  && bash /usr/local/share/devcontainer/install_awscli.sh \
  && bash /usr/local/share/devcontainer/install_dockercli.sh \
  && (getent group docker || groupadd -g 999 docker) \
