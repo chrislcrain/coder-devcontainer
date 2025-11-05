@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 if [ -d /home/coder ]; then
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /home/coder/.powerlevel10k
   # Add to .zshrc if not present
@@ -10,6 +8,7 @@ if [ -d /home/coder ]; then
     echo 'source ~/.powerlevel10k/powerlevel10k.zsh-theme' >> "/home/coder/.zshrc"
 fi
 
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Define variables
 USER_HOME="/home/coder"
