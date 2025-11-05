@@ -9,4 +9,7 @@ https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_C
 | tee /etc/apt/sources.list.d/docker.list >/dev/null
 
 apt-get update && apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    gnupg \
     docker-ce-cli
