@@ -13,12 +13,13 @@ RUN chmod +x /usr/local/share/devcontainer/*.sh \
  && chown -R ${USER}:${USER} /usr/local/share/devcontainer
 
 RUN bash /usr/local/share/devcontainer/install_packages.sh
-RUN bash /usr/local/share/devcontainer/install_awscli.sh
-RUN bash /usr/local/share/devcontainer/configure_zsh.sh
-
-RUN pipx ensurepath
-
-RUN chsh -s /usr/bin/zsh ${USER}
 
 USER coder
+RUN bash /usr/local/share/devcontainer/install_awscli.sh
+RUN bash /usr/local/share/devcontainer/configure_zsh.sh
+RUN pipx ensurepath
+
+USER root
+RUN chsh -s /usr/bin/zsh ${USER}
+
 WORKDIR /home/coder

@@ -20,7 +20,6 @@ apt-get update && apt-get install -y \
     tree \
     wget \
     tmux \
-    zsh \
     make \
     libssl-dev \
     zlib1g-dev \
