@@ -10,6 +10,7 @@ RUN groupadd -g ${GID} ${USER} \
 
 COPY .devcontainer/files/.p10k.zsh /home/coder/.p10k.zsh
 COPY .devcontainer/scripts /usr/local/share/devcontainer
+COPY .devcontainer/scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN chown coder:coder /home/coder/.p10k.zsh \
  && chmod 0644 /home/coder/.p10k.zsh \
@@ -25,4 +26,5 @@ RUN chown coder:coder /home/coder/.p10k.zsh \
 USER coder
 RUN bash /usr/local/share/devcontainer/configure_zsh.sh \
  && pipx ensurepath
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 WORKDIR /home/coder
