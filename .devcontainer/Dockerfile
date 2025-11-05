@@ -16,8 +16,8 @@ RUN chown coder:coder /home/coder/.p10k.zsh \
  && chmod 0644 /home/coder/.p10k.zsh \
  && chmod +x /usr/local/share/devcontainer/*.sh \
  && chown -R ${USER}:${USER} /usr/local/share/devcontainer \
- # && bash /usr/local/share/devcontainer/install_packages.sh \
- # && bash /usr/local/share/devcontainer/install_awscli.sh \
+ && bash /usr/local/share/devcontainer/install_packages.sh \
+ && bash /usr/local/share/devcontainer/install_awscli.sh \
  && bash /usr/local/share/devcontainer/install_dockercli.sh \
  && chsh -s /usr/bin/zsh ${USER}
 
