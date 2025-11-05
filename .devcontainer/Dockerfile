@@ -22,4 +22,5 @@ RUN pipx ensurepath
 USER root
 RUN chsh -s /usr/bin/zsh ${USER}
 
+USER coder
 WORKDIR /home/coder
