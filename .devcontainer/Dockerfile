@@ -19,14 +19,10 @@ RUN chown coder:coder /home/coder/.p10k.zsh \
  && bash /usr/local/share/devcontainer/install_awscli.sh \
  && bash /usr/local/share/devcontainer/install_dockercli.sh \
  && (getent group docker || groupadd -g 989 docker) \
- && usermod -aG docker ${USER}
- 
+ && usermod -aG docker ${USER} \
+ && chsh -s /usr/bin/zsh ${USER}
+
 USER coder
 RUN bash /usr/local/share/devcontainer/configure_zsh.sh \
  && pipx ensurepath
-
-USER root
-RUN chsh -s /usr/bin/zsh ${USER}
-
-USER coder
 WORKDIR /home/coder
