@@ -22,8 +22,6 @@ RUN chown coder:coder /home/coder/.p10k.zsh \
  && bash /usr/local/share/devcontainer/install_dockercli.sh \
  && chsh -s /usr/bin/zsh ${USER}
 
-ENTRYPOINT ["/usr/local/share/devcontainer/entrypoint.sh"]
-
 USER coder
 RUN bash /usr/local/share/devcontainer/configure_zsh.sh \
  && pipx ensurepath
