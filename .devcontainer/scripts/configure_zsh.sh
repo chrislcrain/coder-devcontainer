@@ -8,11 +8,6 @@ if [ -d /home/coder ]; then
   # Add to .zshrc if not present
   grep -qxF 'source ~/.powerlevel10k/powerlevel10k.zsh-theme' "/home/coder/.zshrc" || \
     echo 'source ~/.powerlevel10k/powerlevel10k.zsh-theme' >> "/home/coder/.zshrc"
-  # Copy pre-configured .p10k.zsh if available
-  if [ -f /etc/p10k.zsh ]; then
-    cp /etc/p10k.zsh /home/coder/.p10k.zsh
-    chown coder:coder /home/coder/.p10k.zsh
-  fi
 fi
 
 
