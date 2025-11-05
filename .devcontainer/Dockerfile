@@ -17,10 +17,10 @@ RUN chown coder:coder /home/coder/.p10k.zsh \
  && chown -R ${USER}:${USER} /usr/local/share/devcontainer
 
 RUN bash /usr/local/share/devcontainer/install_packages.sh \
- && (groupadd -g 999 docker || true) \
- && usermod -aG docker ${USER} \
  && bash /usr/local/share/devcontainer/install_awscli.sh \
- && bash /usr/local/share/devcontainer/install_dockercli.sh
+ && bash /usr/local/share/devcontainer/install_dockercli.sh \
+ && (groupadd -g 999 docker || true) \
+ && usermod -aG docker ${USER}
  
 USER coder
 RUN bash /usr/local/share/devcontainer/configure_zsh.sh \
