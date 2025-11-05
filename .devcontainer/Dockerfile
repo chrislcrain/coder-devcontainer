@@ -24,6 +24,5 @@ RUN chown coder:coder /home/coder/.p10k.zsh \
 
 USER coder
 RUN bash /usr/local/share/devcontainer/configure_zsh.sh \
- && pipx ensurepath \
- && newgrp docker
+ && pipx ensurepath
 WORKDIR /home/coder
