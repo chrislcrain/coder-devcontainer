@@ -6,8 +6,7 @@ ARG UID=1001
 ARG GID=1001
 
 RUN groupadd -g ${GID} ${USER} \
- && groupadd -g 989 docker \
- && useradd -m -s /bin/sh -u ${UID} -g ${GID} -G docker ${USER}
+ && useradd -m -s /bin/sh -u ${UID} -g ${GID} ${USER}
 
 COPY .devcontainer/files/.p10k.zsh /home/coder/.p10k.zsh
 COPY .devcontainer/scripts /usr/local/share/devcontainer
@@ -25,3 +24,4 @@ USER coder
 RUN bash /usr/local/share/devcontainer/configure_zsh.sh \
  && pipx ensurepath
 WORKDIR /home/coder
+ENTRYPOINT ["/usr/local/share/devcontainer/entrypoint.sh"]
