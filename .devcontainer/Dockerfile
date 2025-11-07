@@ -22,10 +22,11 @@ RUN chown coder:coder /home/coder/.p10k.zsh \
  && bash /usr/local/share/devcontainer/install_packages.sh \
  && bash /usr/local/share/devcontainer/install_awscli.sh \
  && bash /usr/local/share/devcontainer/install_dockercli.sh \
+ && ln -df /home/coder/.local/bin/poetry /usr/bin/poetry \
  && chsh -s /usr/bin/zsh ${USER}
 
 USER coder
 RUN bash /usr/local/share/devcontainer/configure_zsh.sh \
  && bash /usr/local/share/devcontainer/install_pyenv.sh \
- && pipx ensurepath
+ && bash /usr/local/share/devcontainer/install_poetry.sh
 WORKDIR /workspace
