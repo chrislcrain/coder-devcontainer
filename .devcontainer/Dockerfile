@@ -23,6 +23,7 @@ RUN chown coder:coder /home/coder/.p10k.zsh \
  && bash /usr/local/share/devcontainer/install_packages.sh \
  && bash /usr/local/share/devcontainer/install_awscli.sh \
  && bash /usr/local/share/devcontainer/install_dockercli.sh \
+ && mkdir -p /home/coder/.local/bin \
  && ln -df /home/coder/.local/bin/poetry /usr/bin/poetry \
  && chsh -s /usr/bin/zsh ${USER}
 
