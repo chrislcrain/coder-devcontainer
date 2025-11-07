@@ -16,6 +16,7 @@ COPY .devcontainer/scripts /usr/local/share/devcontainer
 
 RUN chown coder:coder /home/coder/.p10k.zsh \
  && chmod 0644 /home/coder/.p10k.zsh \
+ && chown coder:coder /home/coder/.gitconfig \
  && chmod 0644 /home/coder/.gitconfig \
  && chmod +x /usr/local/share/devcontainer/*.sh \
  && chown -R ${USER}:${USER} /usr/local/share/devcontainer \
