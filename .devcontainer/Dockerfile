@@ -11,12 +11,14 @@ RUN groupadd -g ${DOCKER_GID} docker \
  && useradd -m -s /bin/zsh -u ${UID} -g ${GID} -G docker ${USER}
 
 COPY .devcontainer/scripts /usr/local/share/devcontainer
+COPY .devcontainer/files/environment /etc/environment
 
 RUN chmod +x /usr/local/share/devcontainer/*.sh \
  && chown -R ${USER}:${USER} /usr/local/share/devcontainer \
  && bash /usr/local/share/devcontainer/install_packages.sh \
  && bash /usr/local/share/devcontainer/install_awscli.sh \
  && bash /usr/local/share/devcontainer/install_dockercli.sh \
+ && export PATH="/home/coder/.local/bin:$PATH" \
  && chsh -s /usr/bin/zsh ${USER}
 
 USER coder
