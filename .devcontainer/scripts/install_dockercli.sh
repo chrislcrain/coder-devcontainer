@@ -15,4 +15,5 @@ https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_C
 | tee /etc/apt/sources.list.d/docker.list >/dev/null
 
 apt-get update && apt-get install -y \
-    docker-ce-cli
+    docker-ce-cli \
+    docker.io
