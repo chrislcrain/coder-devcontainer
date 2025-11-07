@@ -26,5 +26,6 @@ RUN chown coder:coder /home/coder/.p10k.zsh \
 
 USER coder
 RUN bash /usr/local/share/devcontainer/configure_zsh.sh \
+ && bash /usr/local/share/devcontainer/install_pyenv.sh \
  && pipx ensurepath
 WORKDIR /workspace
