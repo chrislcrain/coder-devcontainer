@@ -15,5 +15,6 @@ eval "$(pyenv init - zsh)"
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.powerlevel10k/powerlevel10k.zsh-theme
+source $HOME/.p10k.zsh
 source $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
