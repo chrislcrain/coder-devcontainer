@@ -6,4 +6,4 @@ pipx ensurepath
 ZSH_CUSTOM="/home/coder/.oh-my-zsh"
 
 mkdir -p $ZSH_CUSTOM/plugins/poetry
-poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
+$HOME/.local/bin/poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
