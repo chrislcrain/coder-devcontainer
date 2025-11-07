@@ -10,15 +10,9 @@ RUN groupadd -g ${DOCKER_GID} docker \
  && groupadd -g ${GID} ${USER} \
  && useradd -m -s /bin/zsh -u ${UID} -g ${GID} -G docker ${USER}
 
-COPY .devcontainer/files/.p10k.zsh /home/coder/.p10k.zsh
-COPY .devcontainer/files/.gitconfig /home/coder/.gitconfig
 COPY .devcontainer/scripts /usr/local/share/devcontainer
 
-RUN chown coder:coder /home/coder/.p10k.zsh \
- && chmod 0644 /home/coder/.p10k.zsh \
- && chown coder:coder /home/coder/.gitconfig \
- && chmod 0644 /home/coder/.gitconfig \
- && chmod +x /usr/local/share/devcontainer/*.sh \
+RUN chmod +x /usr/local/share/devcontainer/*.sh \
  && chown -R ${USER}:${USER} /usr/local/share/devcontainer \
  && bash /usr/local/share/devcontainer/install_packages.sh \
  && bash /usr/local/share/devcontainer/install_awscli.sh \
@@ -29,4 +23,7 @@ USER coder
 RUN bash /usr/local/share/devcontainer/configure_zsh.sh \
  && bash /usr/local/share/devcontainer/install_pyenv.sh \
  && bash /usr/local/share/devcontainer/install_poetry.sh
+COPY .devcontainer/files/.p10k.zsh /home/coder/.p10k.zsh
+COPY .devcontainer/files/.gitconfig /home/coder/.gitconfig
+COPY .devcontainer/files/.zshrc /home/coder/.zshrc
 WORKDIR /workspace

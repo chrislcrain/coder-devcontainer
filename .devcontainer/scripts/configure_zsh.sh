@@ -33,19 +33,6 @@ if [ ! -d "$AUTOSUGGESTIONS" ]; then
   git clone https://github.com/zsh-users/zsh-autosuggestions "$AUTOSUGGESTIONS"
 fi
 
-# Make sure target plugins line is present in .zshrc
-if ! grep -q "plugins=.*zsh-syntax-highlighting.*zsh-autosuggestions" "$ZSHRC"; then
-  sed -i '/^plugins=/ s/)/ zsh-syntax-highlighting zsh-autosuggestions)/' "$ZSHRC"
-fi
-
-# Source plugins at the end of .zshrc if not already there
-if ! grep -q "zsh-syntax-highlighting.zsh" "$ZSHRC"; then
-  echo "source $SYNTAX_HIGHLIGHTING/zsh-syntax-highlighting.zsh" >> "$ZSHRC"
-fi
-if ! grep -q "zsh-autosuggestions.zsh" "$ZSHRC"; then
-  echo "source $AUTOSUGGESTIONS/zsh-autosuggestions.zsh" >> "$ZSHRC"
-fi
-
 # Set correct ownership
 chown coder:coder "$ZSHRC" "$SYNTAX_HIGHLIGHTING" "$AUTOSUGGESTIONS" -R
 
