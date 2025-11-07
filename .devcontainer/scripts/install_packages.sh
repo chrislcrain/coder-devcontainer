@@ -15,6 +15,7 @@ apt-get update && apt-get install -y \
     unzip \
     jq \
     htop \
+    vim \
     net-tools \
     iputils-ping \
     dnsutils \
