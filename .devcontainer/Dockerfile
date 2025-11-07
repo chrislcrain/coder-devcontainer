@@ -29,6 +29,3 @@ COPY .devcontainer/files/.p10k.zsh /home/coder/.p10k.zsh
 COPY .devcontainer/files/.gitconfig /home/coder/.gitconfig
 COPY .devcontainer/files/.zshrc /home/coder/.zshrc
 WORKDIR /workspace
-
-USER root
-ENTRYPOINT ["/usr/local/share/devcontainer/entrypoint.sh"]
