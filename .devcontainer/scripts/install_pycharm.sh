@@ -10,7 +10,7 @@ rm "$TARGET_DIR/jetbrains-clients-downloader-linux-x86_64-1867.tar.gz"
 
 "$TARGET_DIR/jetbrains-clients-downloader-linux-x86_64-1867/bin/jetbrains-clients-downloader" \
   --products-filter PY \
-  --build-filter 252.26199.168 \
+  --build-filter 252.27397.106 \
   --platforms-filter linux-x64 \
   --download-backends "$TARGET_DIR/JetBrains"
 
