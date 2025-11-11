@@ -28,4 +28,4 @@ RUN bash /usr/local/share/devcontainer/configure_zsh.sh \
 COPY .devcontainer/files/.p10k.zsh /home/coder/.p10k.zsh
 COPY .devcontainer/files/.gitconfig /home/coder/.gitconfig
 COPY .devcontainer/files/.zshrc /home/coder/.zshrc
-WORKDIR /workspace
+WORKDIR /home/coder/code
