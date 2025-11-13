@@ -18,7 +18,7 @@ RUN chmod +x /usr/local/share/devcontainer/*.sh \
  && bash /usr/local/share/devcontainer/install_packages.sh \
  && bash /usr/local/share/devcontainer/install_awscli.sh \
  && bash /usr/local/share/devcontainer/install_dockercli.sh \
- && sudo bash /usr/local/share/devcontainer/set_root_user.sh \
+ && bash /usr/local/share/devcontainer/set_root_user.sh \
  && export PATH="/home/coder/.local/bin:$PATH" \
  && chsh -s /usr/bin/zsh ${USER}
 
