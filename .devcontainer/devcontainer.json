@@ -1,8 +1,5 @@
 {
   "name": "python-dev",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": ".."
-  },
+  "image": "sramcoderregistry.azurecr.io/devcontainers/coder:latest",
   "remoteUser": "coder"
 }
