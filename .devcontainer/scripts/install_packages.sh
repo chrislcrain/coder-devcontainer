@@ -37,5 +37,4 @@ apt-get update && apt-get install -y \
     libxmlsec1-dev \
     libffi-dev \
     liblzma-dev \
- && update-ca-certificates \
  && rm -rf /var/lib/apt/lists/*
