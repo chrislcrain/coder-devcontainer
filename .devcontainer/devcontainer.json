@@ -1,5 +1,8 @@
 {
-  "name": "Coder Infra Devcontainer",
-  "image": "sramcoderregistry.azurecr.io/devcontainers/coder:latest",
+  "name": "Coder Infra Container",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
   "remoteUser": "coder"
 }
