@@ -26,7 +26,8 @@ USER coder
 RUN bash /usr/local/share/devcontainer/configure_zsh.sh \
  && bash /usr/local/share/devcontainer/install_pyenv.sh \
  && bash /usr/local/share/devcontainer/install_poetry.sh \
- && bash /usr/local/share/devcontainer/install_pycharm.sh
+ && bash /usr/local/share/devcontainer/install_pycharm.sh \
+ && poetry config virtualenvs.in-project true
 COPY .devcontainer/files/.p10k.zsh /home/coder/.p10k.zsh
 COPY .devcontainer/files/.gitconfig /home/coder/.gitconfig
 COPY .devcontainer/files/.zshrc /home/coder/.zshrc
