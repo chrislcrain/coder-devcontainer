@@ -2,8 +2,9 @@
 
 TARGET_DIR="/home/coder"
 
-wget -O "$TARGET_DIR/jetbrains-clients-downloader-linux-x86_64-1867.tar.gz" \
-  https://download.jetbrains.com/idea/code-with-me/backend/jetbrains-clients-downloader-linux-x86_64-1867.tar.gz
+curl -fL \
+  -o "$TARGET_DIR/jetbrains-clients-downloader-linux-x86_64-1867.tar.gz" \
+  "https://download.jetbrains.com/idea/code-with-me/backend/jetbrains-clients-downloader-linux-x86_64-1867.tar.gz"
 
 tar -xzvf "$TARGET_DIR/jetbrains-clients-downloader-linux-x86_64-1867.tar.gz" -C "$TARGET_DIR"
 rm "$TARGET_DIR/jetbrains-clients-downloader-linux-x86_64-1867.tar.gz"
