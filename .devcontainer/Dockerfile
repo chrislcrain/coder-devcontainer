@@ -11,6 +11,7 @@ RUN groupadd -g ${DOCKER_GID} docker \
  && useradd -m -s /bin/zsh -u ${UID} -g ${GID} -G docker ${USER}
 
 COPY .devcontainer/scripts /usr/local/share/devcontainer
+COPY .devcontainer/files/environment /etc/environment
 COPY .devcontainer/files/zshenv /etc/zsh/zshenv
 
 RUN chmod +x /usr/local/share/devcontainer/*.sh \
