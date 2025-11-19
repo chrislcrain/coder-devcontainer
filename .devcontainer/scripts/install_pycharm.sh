@@ -19,7 +19,6 @@ curl -fL \
   --products-filter PY \
   --build-filter 252.27397.106 \
   --platforms-filter linux-x64 \
-  --download-backends "$TARGET_DIR/JetBrains"
 
 tar -xzvf "$TARGET_DIR"/JetBrains/backends/PY/*.tar.gz -C "$TARGET_DIR/JetBrains/backends/PY"
 rm -rf "$TARGET_DIR"/JetBrains/backends/PY/*.tar.gz
