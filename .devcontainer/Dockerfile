@@ -20,7 +20,6 @@ RUN chmod +x /usr/local/share/devcontainer/*.sh \
  && bash /usr/local/share/devcontainer/install_awscli.sh \
  && bash /usr/local/share/devcontainer/install_dockercli.sh \
  && export PATH="/home/coder/.local/bin:$PATH" \
- && ln -df /home/coder/.local/bin/poetry /usr/bin/poetry \
  && chsh -s /usr/bin/zsh ${USER}
 
 USER coder
@@ -30,6 +29,10 @@ RUN bash /usr/local/share/devcontainer/configure_zsh.sh \
  && bash /usr/local/share/devcontainer/install_pycharm.sh \
  && /home/coder/.local/bin/poetry config virtualenvs.in-project true
 
+USER root
+RUN ln -df /home/coder/.local/bin/poetry /usr/bin/poetry \
+
+USER coder
 COPY .devcontainer/files/.p10k.zsh /home/coder/.p10k.zsh
 COPY .devcontainer/files/.gitconfig /home/coder/.gitconfig
 COPY .devcontainer/files/.zshrc /home/coder/.zshrc
