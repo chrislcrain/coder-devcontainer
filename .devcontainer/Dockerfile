@@ -30,7 +30,7 @@ RUN bash /usr/local/share/devcontainer/configure_zsh.sh \
  && /home/coder/.local/bin/poetry config virtualenvs.in-project true
 
 USER root
-RUN ln -df /home/coder/.local/bin/poetry /usr/bin/poetry \
+RUN ln -df /home/coder/.local/bin/poetry /usr/bin/poetry
 
 USER coder
 COPY .devcontainer/files/.p10k.zsh /home/coder/.p10k.zsh
