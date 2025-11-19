@@ -37,4 +37,5 @@ apt-get update && apt-get install -y \
     libxmlsec1-dev \
     libffi-dev \
     liblzma-dev \
+    uuid-runtime \
  && rm -rf /var/lib/apt/lists/*
