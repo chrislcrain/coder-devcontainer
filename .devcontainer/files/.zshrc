@@ -1,5 +1,4 @@
 export ZSH="$HOME/.oh-my-zsh"
-export GITSTATUS_LOG_LEVEL=error
 
 ZSH_THEME="robbyrussell"
 
